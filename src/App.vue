@@ -24,4 +24,10 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
 }
+
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
 </style>

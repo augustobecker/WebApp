@@ -1,8 +1,5 @@
 <template>
   <nav class="navbar">
-    <div class="navbar-logo">
-      <img src="logo.png" alt="Logo" class="logo" />
-    </div>
 
     <div class="navbar-toggle" @click="toggleMenu">
       <span class="bar"></span>
@@ -10,14 +7,17 @@
       <span class="bar"></span>
     </div>
 
+
     <ul class="navbar-menu" :class="{ active: isMenuActive }">
       <li v-for="(item, index) in menuItems" :key="index" class="navbar-item">
+
         <div @click="toggleSubmenu(index)" class="navbar-link-wrapper">
           <a href="#" class="navbar-link">
             {{ item.title }}
             <span v-if="item.subitems.length" class="arrow" :class="{ 'rotate': item.isOpen }">▼</span>
           </a>
         </div>
+
         <ul v-if="item.isOpen" :class="['submenu', { 'show': item.isOpen }]">
           <li v-for="(subitem, subIndex) in item.subitems" :key="'sub-' + subIndex" :class="{ 'show': subitem.isOpen }" class="navbar-subitem">
             <div @click.stop="toggleNested(index, subIndex)" class="navbar-sublink-wrapper">
@@ -33,13 +33,20 @@
             </ul>
           </li>
         </ul>
+
       </li>
+
     </ul>
+
+    <div class="navbar-logo">
+      <img src="logo.png" alt="EVAS" class="logo" />
+    </div>
     
   </nav>
 </template>
 
 <script>
+
 export default {
   name: "Navbar",
   data() {
@@ -47,7 +54,7 @@ export default {
       isMenuActive: false,
       menuItems: [
         { title: "Home", subitems: [] },
-        { title: "Sobre", subitems: [] },
+        { title: "Dashboards", subitems: [] },
         {
           title: "Hardening",
           isOpen: false,
@@ -82,115 +89,87 @@ export default {
   }
 };
 </script>
+
 <style scoped>
-  /* Global Styles */
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #333;
-    padding: 0 20px;
-  }
 
-  .logo {
-    height: 50px;
-    width: auto;
-  }
+body {  
+  font-family: sans-serif;
+}
 
-  .navbar-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-  }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
 
-  .bar {
-    height: 3px;
-    width: 25px;
-    background-color: white;
-    margin: 4px 0;
-    transition: 0.4s;
-  }
+.logo {
+  height: 50px;
+  width: auto;
+}
 
-  /* Menu Styles */
-  .navbar-menu, .submenu, .nested-submenu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    background-color: #444;
-  }
+.navbar {
+  background-color: #061129;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+}
 
-  .navbar-menu {
-    display: flex;
-  }
+.navbar-menu {
+  display: flex;
+}
 
-  .navbar-menu.active, .submenu.show, .nested-submenu.show {
-    display: block;
-  }
+.navbar-item {
+  position: relative;
+  padding: 10px 30px;
+  border-right: 2px solid #e2e6e9;
+  border-left: 2px solid #e2e6e9;
+}
 
-  .navbar-item {
-    position: relative;
-    margin-bottom: 10px;
-  }
+.navbar-item a {
+  text-decoration: none;
+  font-size: 20px;
+  color: #e2e6e9;
+  transition: all 0.3s;
+}
 
-  .navbar-link-wrapper, .navbar-sublink-wrapper {
-    cursor: pointer;
-    padding: 14px 20px;
-  }
+.navbar-item a:hover {
+  color: #046fc2;
+}
 
-  .navbar-link, .navbar-sublink, .navbar-subsub-link {
-    color: white;
-    text-decoration: none;
-    display: block;
-  }
+.submenu {
+  display: none;
+  position: absolute;
+  background-color: #061129;
+  z-index: 1000;
+  top: 100%;
+  width: 100%;
+  left: 0;
+}
 
-  .navbar-link:hover, .navbar-sublink:hover, .navbar-subsub-link:hover {
-    background-color: #ddd;
-    color: black;
-  }
+.submenu ul {
+  display: block;
+  left: 100%;
+  top: 100%;
+  width: 100%;
+}
 
-  .submenu, .nested-submenu {
-    position: absolute;
-    left: 0;
-    right: 0;
-    display: none;
-  }
+.submenu li {
+  padding: 10px 0;
+  width: 100%;
+}
 
-  .nested-submenu {
-    margin-left: 100%;
-    width: 100%;
-  }
+.submenu.show {
+  display: block;
+}
 
-  .submenu > li, .nested-submenu > li {
-    padding: 8px 20px;
-  }
+.arrow, .plus {
+  margin-left: 5px;
+  transition: transform 0.3s;
+}
 
-  /* Additional Elements */
-  .arrow, .plus {
-    margin-left: 5px;
-    transition: transform 0.3s;
-  }
+.rotate {
+  transform: rotate(180deg);
+}
 
-  .rotate {
-    transform: rotate(180deg);
-  }
-
-  /* Media Queries */
-  @media (max-width: 768px) {
-    .navbar-toggle {
-      display: flex;
-    }
-
-    .navbar-menu {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      width: 100%;
-    }
-
-    .navbar-menu.active {
-      display: flex;
-    }
-  }
 </style>

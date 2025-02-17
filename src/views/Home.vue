@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <h1>Bem-vindo ao Meu Projeto Vue.js</h1>
-    <p>Este é o conteúdo da página inicial.</p>
+    <h1>Engenheira Virtual de Agências</h1>
+    <p>Hardening Automações</p>
   </div>
 </template>
 
