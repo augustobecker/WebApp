@@ -117,6 +117,7 @@ ul {
 
 .navbar-menu {
   display: flex;
+  padding: 0 5%;
 }
 
 .navbar-item {
@@ -138,9 +139,10 @@ ul {
 }
 
 .submenu {
+  margin-top: 1rem;
   display: none;
   position: absolute;
-  background-color: #061129;
+  background-color: rgba(6, 17, 41, 0.9);
   z-index: 1000;
   top: 100%;
   width: 100%;
@@ -170,6 +172,51 @@ ul {
 
 .rotate {
   transform: rotate(180deg);
+}
+
+.submenu.show {
+  display: block;
+}
+
+.navbar-subitem .submenu {
+  left: 100px; /* Pode ser ajustado conforme seu design */
+  top: 0;
+}
+
+.nested-submenu {
+  display: none;
+  position: absolute;
+  background-color: rgba(6, 17, 41, 0.9);
+  left: 100%;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.nested-submenu.show {
+  display: block;
+}
+
+.navbar-subitem {
+  position: relative;
+}
+
+.navbar-sublink-wrapper {
+  position: relative; /* Serve como referência para o nested submenu */
+}
+
+.nested-submenu {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0; /* Inicialmente sem offset */
+  transform: translateY(-50%); /* Ajuste vertical com translate, deixando em cima do item do submenu */
+  width: 100%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.nested-submenu.show {
+  display: block;
 }
 
 </style>
