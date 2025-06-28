@@ -1,222 +1,174 @@
 <template>
-  <nav class="navbar">
-
-    <div class="navbar-toggle" @click="toggleMenu">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </div>
-
-
-    <ul class="navbar-menu" :class="{ active: isMenuActive }">
-      <li v-for="(item, index) in menuItems" :key="index" class="navbar-item">
-
-        <div @click="toggleSubmenu(index)" class="navbar-link-wrapper">
-          <a href="#" class="navbar-link">
-            {{ item.title }}
-            <span v-if="item.subitems.length" class="arrow" :class="{ 'rotate': item.isOpen }">▼</span>
-          </a>
+  <div class="navbar-container">
+    <!-- Navbar principal -->
+    <nav class="navbar">
+      <!-- Menu Hambúrguer -->
+      <div class="navbar-left">
+        <div class="navbar-toggle" @click="toggleMenu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
         </div>
+        <span class="navbar-product-name">{{ productName }}</span> <!-- Nome do produto -->
+      </div>
 
-        <ul v-if="item.isOpen" :class="['submenu', { 'show': item.isOpen }]">
-          <li v-for="(subitem, subIndex) in item.subitems" :key="'sub-' + subIndex" :class="{ 'show': subitem.isOpen }" class="navbar-subitem">
-            <div @click.stop="toggleNested(index, subIndex)" class="navbar-sublink-wrapper">
-              <a href="#" class="navbar-sublink">
-                {{ subitem.title }}
-                <span v-if="subitem.subsubitems.length" class="plus" :class="{ 'rotate': subitem.isOpen }">+</span>
-              </a>
-            </div>
-            <ul v-if="subitem.isOpen" :class="['nested-submenu', { 'show': subitem.isOpen }]">
-              <li v-for="(subsubmenu, subsubIndex) in subitem.subsubitems" :key="'subsub-' + subsubIndex">
-                <a href="#" class="navbar-subsub-link">{{ subsubmenu }}</a>
-              </li>
-            </ul>
-          </li>
-        </ul>
+      <!-- Página atual -->
+      <div class="navbar-title">
+        {{ currentPage }}
+      </div>
 
+      <!-- Ícones do canto direito -->
+      <div class="navbar-icons">
+        <i class="icon-search"></i>
+        <i class="icon-help"></i>
+        <i class="icon-notifications"></i>
+      </div>
+    </nav>
+
+    <!-- Menu abaixo da navbar -->
+    <ul class="submenu">
+      <li
+        v-for="(item, index) in menuItems"
+        :key="index"
+        :class="{ active: selectedItem === index }"
+        @click="selectItem(index)"
+      >
+        {{ item }}
       </li>
-
     </ul>
-
-    <div class="navbar-logo">
-      <img src="logo.png" alt="EVAS" class="logo" />
-    </div>
-    
-  </nav>
+  </div>
 </template>
 
 <script>
-
 export default {
   name: "Navbar",
   data() {
     return {
       isMenuActive: false,
-      menuItems: [
-        { title: "Home", subitems: [] },
-        { title: "Dashboards", subitems: [] },
-        {
-          title: "Hardening",
-          isOpen: false,
-          subitems: [
-            {
-              title: "Templates",
-              isOpen: false,
-              subsubitems: ["Web Design", "UI/UX"]
-            },
-            {
-              title: "Comandos",
-              isOpen: false,
-              subsubitems: ["Web Dev", "App Dev"]
-            },
-            { title: "SEO", isOpen: false, subsubitems: [] },
-          ]
-        },
-        { title: "Contato", subitems: [] },
-      ],
+      productName: "Engenheira Virtual de Agências",
+      currentPage: "Automações", // Página atual
+      menuItems: ["Gestão de Configuração", "Coletas", "Dashboards", "Saúde", "Acessos"], // Menu principal
+      selectedItem: 0, // Índice do item selecionado
     };
   },
   methods: {
     toggleMenu() {
       this.isMenuActive = !this.isMenuActive;
     },
-    toggleSubmenu(index) {
-      this.menuItems[index].isOpen = !this.menuItems[index].isOpen;
+    selectItem(index) {
+      this.selectedItem = index; // Define qual item foi selecionado
     },
-    toggleNested(itemIndex, subIndex) {
-      this.menuItems[itemIndex].subitems[subIndex].isOpen = !this.menuItems[itemIndex].subitems[subIndex].isOpen;
-    },
-  }
+  },
 };
 </script>
 
 <style scoped>
-
-body {  
-  font-family: sans-serif;
+/* Reset básico */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 ul {
   list-style-type: none;
+  margin: 0;
   padding: 0;
 }
 
-.logo {
-  height: 50px;
-  width: auto;
+a {
+  text-decoration: none;
 }
 
+/* Navbar */
 .navbar {
-  background-color: #061129;
-  height: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px 20px;
+  border-bottom: 2px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+/* Agrupamento do menu e nome do produto no canto esquerdo */
+.navbar-left {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 5%;
+  gap: 20px; /* Espaçamento entre o menu hambúrguer e o nome do produto */
 }
 
-.navbar-menu {
+/* Menu Hambúrguer */
+.navbar-toggle {
   display: flex;
-  padding: 0 5%;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+  margin-left: 20px;
 }
 
-.navbar-item {
-  position: relative;
-  padding: 10px 30px;
-  border-right: 2px solid #e2e6e9;
-  border-left: 2px solid #e2e6e9;
+.navbar-toggle .bar {
+  width: 24px;
+  height: 3px;
+  background-color: #000000;
+  border-radius: 2px;
 }
 
-.navbar-item a {
-  text-decoration: none;
-  font-size: 20px;
-  color: #e2e6e9;
-  transition: all 0.3s;
+/* Nome do Produto */
+.navbar-product-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
 }
 
-.navbar-item a:hover {
-  color: #046fc2;
+/* Título centralizado */
+.navbar-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000000;
 }
 
+/* Ícones no canto direito da navbar */
+.navbar-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.navbar-icons i {
+  font-size: 18px;
+  color: #c0c0c0;
+  cursor: pointer;
+}
+
+.navbar-icons i:hover {
+  color: #000000;
+}
+
+/* Menu abaixo da navbar */
 .submenu {
-  margin-top: 1rem;
-  display: none;
-  position: absolute;
-  background-color: rgba(6, 17, 41, 0.9);
-  z-index: 1000;
-  top: 100%;
-  width: 100%;
-  left: 0;
-}
-
-.submenu ul {
-  display: block;
-  left: 100%;
-  top: 100%;
-  width: 100%;
+  display: flex;
+  padding: 0 20px;
+  background-color: #ffffff;
+  border-bottom: 2px solid #e0e0e0;
 }
 
 .submenu li {
-  padding: 10px 0;
-  width: 100%;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #808080;
+  cursor: pointer;
+  border-bottom: 2px solid transparent; /* Borda para animação */
+  transition: all 0.3s ease;
 }
 
-.submenu.show {
-  display: block;
+.submenu li.active {
+  font-weight: bold;
+  color: #000000;
+  border-bottom: 2px solid #003366; /* Azul escuro */
 }
 
-.arrow, .plus {
-  margin-left: 5px;
-  transition: transform 0.3s;
+.submenu li:hover {
+  color: #003366;
 }
-
-.rotate {
-  transform: rotate(180deg);
-}
-
-.submenu.show {
-  display: block;
-}
-
-.navbar-subitem .submenu {
-  left: 100px; /* Pode ser ajustado conforme seu design */
-  top: 0;
-}
-
-.nested-submenu {
-  display: none;
-  position: absolute;
-  background-color: rgba(6, 17, 41, 0.9);
-  left: 100%;
-  top: 0;
-  width: 100%;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.nested-submenu.show {
-  display: block;
-}
-
-.navbar-subitem {
-  position: relative;
-}
-
-.navbar-sublink-wrapper {
-  position: relative; /* Serve como referência para o nested submenu */
-}
-
-.nested-submenu {
-  display: none;
-  position: absolute;
-  left: 100%;
-  top: 0; /* Inicialmente sem offset */
-  transform: translateY(-50%); /* Ajuste vertical com translate, deixando em cima do item do submenu */
-  width: 100%;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.nested-submenu.show {
-  display: block;
-}
-
 </style>
