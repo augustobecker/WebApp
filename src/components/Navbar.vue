@@ -46,17 +46,22 @@ export default {
     return {
       isMenuActive: false,
       productName: "Engenheira Virtual de Agências",
-      currentPage: "Automações", // Página atual
-      menuItems: ["Gestão de Configuração", "Coletas", "Dashboards", "Saúde", "Acessos"], // Menu principal
-      selectedItem: 0, // Índice do item selecionado
+      menuItems: ["Gestão de Configuração", "Coletas", "Dashboards", "Saúde", "Acessos"],
+      selectedItem: 0,
     };
+  },
+  computed: {
+    // Obtém dinamicamente o título da página a partir das rotas
+    currentPage() {
+      return this.$route.meta.title || "Página"; // 'Página' será usada caso não haja título definido
+    },
   },
   methods: {
     toggleMenu() {
       this.isMenuActive = !this.isMenuActive;
     },
     selectItem(index) {
-      this.selectedItem = index; // Define qual item foi selecionado
+      this.selectedItem = index;
     },
   },
 };
@@ -111,7 +116,7 @@ a {
 .navbar-toggle .bar {
   width: 24px;
   height: 3px;
-  background-color: #000000;
+  background-color: #003366;
   border-radius: 2px;
 }
 
@@ -119,7 +124,7 @@ a {
 .navbar-product-name {
   font-size: 16px;
   font-weight: bold;
-  color: #000000;
+  color: #003366;
 }
 
 /* Título centralizado */
@@ -142,7 +147,7 @@ a {
 }
 
 .navbar-icons i:hover {
-  color: #000000;
+  color: #003366;
 }
 
 /* Menu abaixo da navbar */
