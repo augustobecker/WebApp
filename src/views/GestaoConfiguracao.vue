@@ -29,78 +29,96 @@
 
 <script>
 export default {
-  name: "Geral",
+  name: "Home",
   data() {
     return {
       // As opções ou sessões da tela inicial
       options: [
         {
           title: "Automações",
-          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          icon: "automacoes.png", // Ícone correspondente
           description: "Cadastre e gerencie Automações.",
+          route: "/automacoes",
         },
         {
           title: "SubAutomações",
-          icon: "subautomacoes.png", // Ícone correspondente (Font Awesome)
+          icon: "subautomacoes.png", // Ícone correspondente
           description: "Cadastre e gerencie módulos de uma Automação.",
+          route: "/subautomacoes",
         },
         {
           title: "SubAutomações por Automação",
-          icon: "subautomacoes-por-automacao.png", // Ícone correspondente (Font Awesome)
+          icon: "subautomacoes-por-automacao.png", // Ícone correspondente
           description: "Cadastre e gerencie quais módulos compõem cada Automação.",
+          route: "/subautomacoes-por-automacao",
         },
         {
           title: "Análises",
-          icon: "analises.png", // Ícone correspondente (Font Awesome)
+          icon: "analises.png", // Ícone correspondente
           description: "Cadastre e gerencie análises para validação de cada módulo da Automação.",
+          route: "/analises",
         },
         {
           title: "Comandos",
-          icon: "comandos.png", // Ícone correspondente (Font Awesome)
+          icon: "comandos.png", // Ícone correspondente
           description: "Cadastre e gerencie os comandos utilizados para análise e validação de cada módulo da Automação.",
+          route: "/comandos",
         },
         {
           title: "Comandos por Análise",
-          icon: "comandos-analises.png", // Ícone correspondente (Font Awesome)
+          icon: "comandos-analises.png", // Ícone correspondente
           description: "Cadastre e gerencie quais comandos compõem cada Análise.",
+          route: "/comandos-por-analise",
         },
         {
           title: "Versionamento de Análises",
-          icon: "versionamento-analises.png", // Ícone correspondente (Font Awesome)
+          icon: "versionamento-analises.png", // Ícone correspondente
           description: "Cadastre e gerencie diferentes versões de Análises.",
+          route: "/versionamento-analises",
         },
         {
           title: "Versionamento de Comandos",
-          icon: "versionamento-comandos.png", // Ícone correspondente (Font Awesome)
+          icon: "versionamento-comandos.png", // Ícone correspondente
           description: "Cadastre e gerencie diferentes versões de Comandos.",
+          route: "/versionamento-comandos",
         },
         {
           title: "Fabricantes",
-          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          icon: "automacoes.png", // Ícone correspondente
           description: "Cadastre e gerencie diferentes Fabricantes de Equipamentos gerenciados pelas Automações.",
+          route: "/fabricantes",
         },
         {
           title: "Status de Execução",
-          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
-          description: "Cadastre e gerencie tipos de status para as coletas de execução."
+          icon: "automacoes.png", // Ícone correspondente
+          description: "Cadastre e gerencie tipos de status para as coletas de execução.",
+          route: "/status-execucao",
         },
         {
           title: "Tipos de Script",
-          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
-          description: "Cadastre e gerencie tipos diferentes de comando para serem utilizados nas Automações",
+          icon: "automacoes.png", // Ícone correspondente
+          description: "Cadastre e gerencie tipos diferentes de comando para serem utilizados nas Automações.",
+          route: "/tipos-script",
         },
         {
           title: "Ações de Template",
-          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          icon: "automacoes.png", // Ícone correspondente
           description: "Cadastre ações a serem tomadas por Templates quando aplicados.",
+          route: "/acoes-template",
         },
         {
           title: "Autenticação de Equipamentos",
-          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          icon: "automacoes.png", // Ícone correspondente
           description: "Cadastre e gerencie acessos criptografados para os equipamentos gerenciados por Automação.",
+          route: "/autenticacao-equipamentos",
         },
       ],
     };
+  },
+  methods: {
+    redirectTo(route) {
+      this.$router.push(route); // Redireciona para a rota especificada
+    },
   },
 };
 </script>

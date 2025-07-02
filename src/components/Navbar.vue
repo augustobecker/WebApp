@@ -12,9 +12,9 @@
         <span class="navbar-product-name">{{ productName }}</span> <!-- Nome do produto -->
       </div>
 
-      <!-- Página atual -->
+      <!-- Página atual com combinação de menu -->
       <div class="navbar-title">
-        {{ currentPage }}
+        {{ fullPageTitle }}
       </div>
 
       <!-- Ícones do canto direito -->
@@ -31,9 +31,9 @@
         v-for="(item, index) in menuItems"
         :key="index"
         :class="{ active: selectedItem === index }"
-        @click="selectItem(index)"
+        @click="redirectTo(index)"
       >
-        {{ item }}
+        {{ item.name }}
       </li>
     </ul>
   </div>
@@ -46,22 +46,33 @@ export default {
     return {
       isMenuActive: false,
       productName: "Engenheira Virtual de Agências",
-      menuItems: ["Gestão de Configuração", "Coletas", "Dashboards", "Saúde", "Acessos"],
-      selectedItem: 0,
+      menuItems: [
+        { name: "Gestão de Configuração", route: "/gestao_configuracao" },
+        { name: "Coletas", route: "/coletas" },
+        { name: "Dashboards", route: "/dashboards" },
+        { name: "Saúde", route: "/saude" },
+        { name: "Acessos", route: "/acessos" },
+      ],
+      selectedItem: 0, // Índice do menu selecionado
     };
   },
   computed: {
-    // Obtém dinamicamente o título da página a partir das rotas
+    // Obtém o título da página atual
     currentPage() {
-      return this.$route.meta.title || "Página"; // 'Página' será usada caso não haja título definido
+      return this.$route.meta.title || "Página"; // Fallback caso não haja título definido
+    },
+    // Combina o título da página com o texto do menu selecionado
+    fullPageTitle() {
+      return `${this.menuItems[this.selectedItem].name} | ${this.$route.meta.title}` ;
     },
   },
   methods: {
     toggleMenu() {
       this.isMenuActive = !this.isMenuActive;
     },
-    selectItem(index) {
-      this.selectedItem = index;
+    redirectTo(index) {
+      this.selectedItem = index; // Atualiza o item selecionado
+      this.$router.push(this.menuItems[index].route); // Redireciona para a rota definida
     },
   },
 };
