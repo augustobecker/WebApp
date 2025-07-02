@@ -51,27 +51,27 @@ export default {
         },
         {
           title: "Análises",
-          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          icon: "analises.png", // Ícone correspondente (Font Awesome)
           description: "Cadastre e gerencie análises para validação de cada módulo da Automação.",
         },
         {
           title: "Comandos",
-          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          icon: "comandos.png", // Ícone correspondente (Font Awesome)
           description: "Cadastre e gerencie os comandos utilizados para análise e validação de cada módulo da Automação.",
         },
         {
           title: "Comandos por Análise",
-          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          icon: "comandos-analises.png", // Ícone correspondente (Font Awesome)
           description: "Cadastre e gerencie quais comandos compõem cada Análise.",
         },
         {
           title: "Versionamento de Análises",
-          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          icon: "versionamento-analises.png", // Ícone correspondente (Font Awesome)
           description: "Cadastre e gerencie diferentes versões de Análises.",
         },
         {
           title: "Versionamento de Comandos",
-          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          icon: "versionamento-comandos.png", // Ícone correspondente (Font Awesome)
           description: "Cadastre e gerencie diferentes versões de Comandos.",
         },
         {
