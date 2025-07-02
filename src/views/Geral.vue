@@ -8,9 +8,19 @@
         class="card"
       >
         <h3 class="card-title">{{ option.title }}</h3>
+
+        <!-- Condicional para usar imagem ou ícone com classes -->
         <div class="card-icon">
-          <i :class="option.icon" aria-hidden="true"></i>
+          <template v-if="option.icon.endsWith('.png') || option.icon.endsWith('.jpg') || option.icon.endsWith('.svg')">
+            <!-- Para imagens de arquivos -->
+            <img :src="`/icons/${option.icon}`" :alt="option.title" />
+          </template>
+          <template v-else>
+            <!-- Para ícones Font Awesome ou outras classes -->
+            <i :class="option.icon" aria-hidden="true"></i>
+          </template>
         </div>
+
         <p class="card-description">{{ option.description }}</p>
       </div>
     </div>
@@ -26,68 +36,68 @@ export default {
       options: [
         {
           title: "Automações",
-          icon: "fas fa-cogs", // Ícone correspondente (Font Awesome)
-          description: "Defina um novo item de configuração para ser gerenciado pela Engenheira Virtual de Agências.",
+          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie Automações.",
         },
         {
           title: "SubAutomações",
-          icon: "fas fa-chart-bar", // Ícone correspondente (Font Awesome)
-          description: "Descrição da segunda sessão.",
+          icon: "subautomacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie módulos de uma Automação.",
         },
         {
           title: "SubAutomações por Automação",
-          icon: "fas fa-chart-bar", // Ícone correspondente (Font Awesome)
-          description: "Descrição da segunda sessão.",
+          icon: "subautomacoes-por-automacao.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie quais módulos compõem cada Automação.",
         },
         {
           title: "Análises",
-          icon: "fas fa-user-friends", // Ícone correspondente (Font Awesome)
-          description: "Descrição da terceira sessão.",
+          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie análises para validação de cada módulo da Automação.",
         },
         {
           title: "Comandos",
-          icon: "fas fa-tools", // Ícone correspondente (Font Awesome)
-          description: "Descrição da quarta sessão.",
+          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie os comandos utilizados para análise e validação de cada módulo da Automação.",
         },
         {
           title: "Comandos por Análise",
-          icon: "fas fa-cogs", // Ícone correspondente (Font Awesome)
-          description: "Descrição da primeira sessão.",
+          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie quais comandos compõem cada Análise.",
         },
         {
           title: "Versionamento de Análises",
-          icon: "fas fa-user-friends", // Ícone correspondente (Font Awesome)
-          description: "Descrição da terceira sessão.",
+          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie diferentes versões de Análises.",
         },
         {
           title: "Versionamento de Comandos",
-          icon: "fas fa-tools", // Ícone correspondente (Font Awesome)
-          description: "Descrição da quarta sessão.",
+          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie diferentes versões de Comandos.",
         },
         {
           title: "Fabricantes",
-          icon: "fas fa-user-friends", // Ícone correspondente (Font Awesome)
-          description: "Fabricantes de Equipamentos gerenciados pelas Automações.",
+          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie diferentes Fabricantes de Equipamentos gerenciados pelas Automações.",
         },
         {
           title: "Status de Execução",
-          icon: "fas fa-tools", // Ícone correspondente (Font Awesome)
-          description: "Defina status para as coletas de execução de Automações, Análises e Comandos)"
+          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie tipos de status para as coletas de execução."
         },
         {
           title: "Tipos de Script",
-          icon: "fas fa-cogs", // Ícone correspondente (Font Awesome)
-          description: "Defina novos tipos de comando para serem utilizados nas Automações",
+          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie tipos diferentes de comando para serem utilizados nas Automações",
         },
         {
           title: "Ações de Template",
-          icon: "fas fa-user-friends", // Ícone correspondente (Font Awesome)
-          description: "Descrição da terceira sessão.",
+          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre ações a serem tomadas por Templates quando aplicados.",
         },
         {
           title: "Autenticação de Equipamentos",
-          icon: "fas fa-tools", // Ícone correspondente (Font Awesome)
-          description: "Defina acessos criptografados para os equipamentos gerenciados por Automação.",
+          icon: "automacoes.png", // Ícone correspondente (Font Awesome)
+          description: "Cadastre e gerencie acessos criptografados para os equipamentos gerenciados por Automação.",
         },
       ],
     };
@@ -116,37 +126,28 @@ body {
 /* Grid dos cards */
 .options {
   display: grid;
-
-  /* Adiciona espaçamento apropriado entre os cards */
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Garante que os cards se ajustem corretamente */
-  gap: 20px; /* Controla o espaçamento entre cards */
-  
-  padding: 20px; /* Espaçamento interno ao redor do grid */
-  box-sizing: border-box; /* Inclui padding no cálculo do container */
-  width: 100%; /* O grid ocupa toda a largura disponível */
-  max-width: 1400px; /* Limita o tamanho máximo */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Dinâmica de colunas */
+  grid-auto-rows: 1fr; /* Garante que a altura das linhas seja uniforme */
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1400px;
+  box-sizing: border-box;
 }
 
 /* Cada card */
 .card {
   background-color: #ffffff; /* Fundo branco */
   border: 1px solid #e0e0e0; /* Borda cinza */
-  border-radius: 8px; /* Cantos arredondados */
-  
-  /* Adiciona padding interno contabilizado pelo box-sizing */
-  padding: 20px; /* Espaçamento interno do card */
-  
-  box-sizing: border-box; /* Garante que padding seja incluído no tamanho total */
+  border-radius: 4px;
+  padding: 20px;
+  box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   text-align: center;
-
-  /* Tamanhos proporcionais */
-  aspect-ratio: 1; /* Garante que o card tenha formato quadrado */
-  min-height: 250px; /* Tamanho mínimo do card */
 
   /* Transições suaves */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra leve */
@@ -158,6 +159,19 @@ body {
 .card:hover {
   transform: translateY(-5px); /* Efeito de elevação */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais visível */
+  border: 3px solid #003366; /* Borda cinza */
+}
+
+.card:hover .card-title {
+  color: #003366; /* Altere para a cor desejada */
+  font-weight: bold; /* Torna o texto mais destacado */
+  transition: color 0.3s ease; /* Transição suave ao mudar a cor */
+}
+
+.card:hover .card-description {
+  color: #003366; /* Altere para a cor desejada */
+  font-weight: bold; /* Torna o texto mais destacado */
+  transition: color 0.3s ease; /* Transição suave ao mudar a cor */
 }
 
 /* Título do card */
@@ -165,21 +179,32 @@ body {
   font-size: 20px;
   font-weight: bold;
   color: #333333;
-  margin: 10px 0;
 }
 
 /* Ícone do card */
 .card-icon {
-  font-size: 70px; /* Destaque para o ícone */
+  display: flex;
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+}
+
+/* Ajuste dinâmico do ícone como imagem */
+.card-icon img {
+  max-width: 85%; /* Reduz o tamanho da imagem proporcionalmente ao card */
+  max-height: 85%; /* Impede que o ícone ultrapasse o container */
+  object-fit: contain; /* Garante que a proporção original da imagem seja mantida */
+}
+
+/* Caso seja um ícone baseado em classes (ex. Font Awesome) */
+.card-icon i {
+  font-size: 6vw; /* Escala proporcional ao tamanho da largura da tela */
   color: #666666;
-  margin: 10px 0;
 }
 
 /* Descrição do card */
 .card-description {
   font-size: 14px;
   color: #666666;
-  margin-top: 10px;
 }
 
 
