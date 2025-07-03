@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import GestaoConfiguracao from './views/GestaoConfiguracao.vue';
 import Automacoes from './views/Automacoes.vue'
+import SubAutomacoes from './views/SubAutomacoes.vue'
 
 Vue.use(Router);
 
@@ -20,7 +21,7 @@ const router = new Router({
     // { path: "/saude", component: Saude, meta: { title: "EVA | Saúde" } },
     // { path: "/acessos", component: Acessos, meta: { title: "EVA | Acessos" } }
     { path: "/automacoes", component: Automacoes, meta: { title: "Automações" } },
-    // { path: "/subautomacoes", component: SubAutomacoes, meta: { title: "SubAutomações" } },
+    { path: "/subautomacoes", component: SubAutomacoes, meta: { title: "SubAutomações" } },
     // { path: "/analises", component: Analises, meta: { title: "Análises" } },
   ],
 });

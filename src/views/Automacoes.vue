@@ -198,9 +198,7 @@ export default {
   background-color: rgb(233, 233, 233); /* Fundo cinza claro */
   padding: 20px 0;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  
 }
 
 /* Container principal */
@@ -210,6 +208,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
   gap: 20px;
 }
 
@@ -436,8 +435,8 @@ export default {
 /* Ícone de fechar ("X") no canto superior direito */
 .modal-close {
   position: absolute; /* Permite colocar o ícone fora do fluxo natural */
-  top: 10px; /* Distância da parte superior do modal */
-  right: 15px; /* Distância da lateral direita do modal */
+  top: 0px; /* Distância da parte superior do modal */
+  right: 10px; /* Distância da lateral direita do modal */
   font-weight: bold;
   font-size: 25px; /* Tamanho maior, conforme solicitado */
   color: #333; /* Cor inicial */
