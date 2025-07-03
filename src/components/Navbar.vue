@@ -19,7 +19,7 @@
 
       <!-- Ícones do canto direito -->
       <div class="navbar-icons">
-        <i class="icon-search"></i>
+        <i class="fas fa-search" @click="onSearch"></i> <!-- Ícone da Lupa -->
         <i class="icon-help"></i>
         <i class="icon-notifications"></i>
       </div>
@@ -61,10 +61,22 @@ export default {
     currentPage() {
       return this.$route.meta.title || "Página"; // Fallback caso não haja título definido
     },
-    // Combina o título da página com o texto do menu selecionado
+
+    // Combina o título da página com o texto do menu selecionado, evitando duplicidade
     fullPageTitle() {
-      return `${this.menuItems[this.selectedItem].name} | ${this.$route.meta.title}` ;
-    },
+      const selectedMenuTitle = this.menuItems[this.selectedItem] 
+        ? this.menuItems[this.selectedItem].name 
+        : null; // Título do item selecionado, ou `null` se não existir
+      
+      const currentPageTitle = this.$route.meta.title;
+
+      // Evita duplicidade
+      if (selectedMenuTitle && selectedMenuTitle !== currentPageTitle) {
+        return `${selectedMenuTitle} | ${currentPageTitle}`;
+      }
+
+      return currentPageTitle || "Página";
+    }
   },
   methods: {
     toggleMenu() {
@@ -74,6 +86,9 @@ export default {
       this.selectedItem = index; // Atualiza o item selecionado
       this.$router.push(this.menuItems[index].route); // Redireciona para a rota definida
     },
+    onSearch() {
+      console.log("Ação de busca ativada"); // Substitua com a funcionalidade desejada
+    }
   },
 };
 </script>
@@ -140,9 +155,13 @@ a {
 
 /* Título centralizado */
 .navbar-title {
-  font-size: 18px;
-  font-weight: bold;
-  color: #000000;
+  position: absolute; /* Remove o título do fluxo normal */
+  left: 50%; /* Move o título 50% a partir do lado esquerdo do navbar */
+  transform: translateX(-50%); /* Centraliza o título ao compensar a própria largura */
+  font-size: 18px; /* Define o tamanho do texto */
+  font-weight: bold; /* Coloca o texto em negrito */
+  color: #000000; /* Cor do texto */
+  white-space: nowrap; /* Impede que o texto quebre em várias linhas */
 }
 
 /* Ícones no canto direito da navbar */

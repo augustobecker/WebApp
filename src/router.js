@@ -12,7 +12,7 @@ const router = new Router({
       path: "/gestao_configuracao",
       component: GestaoConfiguracao,
       meta: { 
-        title: "EVA | Gestão de Configuração" 
+        title: "Gestão de Configuração" 
       } 
     },
     // { path: "/coletas", component: Coletas, meta: { title: "EVA | Coletas" } },
@@ -28,7 +28,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // Verifica se a rota atual tem um meta.title definido
   if (to.meta && to.meta.title) {
-    document.title = to.meta.title; // Atualiza o título do navegador
+    document.title = "EVA | " + to.meta.title; // Atualiza o título do navegador
   } else {
     document.title = "Engenheira Virtual de Agências"; // Título padrão (fallback)
   }

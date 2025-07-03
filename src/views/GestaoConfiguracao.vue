@@ -6,6 +6,7 @@
         v-for="(option, index) in options"
         :key="index"
         class="card"
+        @click="redirectTo(option.route)"
       >
         <h3 class="card-title">{{ option.title }}</h3>
 
@@ -224,7 +225,6 @@ body {
   font-size: 14px;
   color: #666666;
 }
-
 
 /* ------ Responsividade Melhorada ------ */
 

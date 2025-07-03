@@ -249,7 +249,7 @@ export default {
   background-color: #ffffff; /* Fundo branco */
   border: 1px solid #e0e0e0; /* Borda cinza */
   border-radius: 3px;
-  padding: 15px;
+  padding: 35px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
 }
 
